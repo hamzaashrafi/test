@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react'
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { HomeContainer } from './Container'
+import { connect } from 'react-redux'
 import './App.css';
+import 'antd/dist/antd.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+const PageNotFound = () => {
+  return <h1>Page Not Found</h1>
 }
-
-export default App;
+export class Routing extends Component {
+  render() {
+    return (
+      <React.Fragment>
+        <Router>
+          <>sadasdsadasd</>
+          <Switch>
+            <Route exact path='/'>
+              {/* {loginSucces ? <Home /> : <LoginContainer />} */}
+              <HomeContainer />
+            </Route>
+            <Route><PageNotFound /></Route>
+          </Switch>
+        </Router>
+      </React.Fragment>
+    )
+  }
+}
+const mapStateToProps = ({ auth }) => {
+  return {
+    isLoggin: auth.isLoggin,
+  }
+};
+export default connect(mapStateToProps, null)(Routing);
